@@ -64,7 +64,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "dev.cobalt.coat"
+        applicationId "com.google.android.youtube.tv"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
