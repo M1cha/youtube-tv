@@ -35,8 +35,8 @@ GRADLE_ARGS+=("$@")
 if [[ "${RESET_GRADLE}" ]]; then
   echo "Cleaning Gradle daemons and locks."
   # If there are any lock files, kill any hung processes still waiting on them.
-  if compgen -G '/var/lock/cobalt-gradle.lock.*'; then
-    lsof -t /var/lock/cobalt-gradle.lock.* | xargs -rt kill
+  if compgen -G '/tmp/cobalt-gradle.lock.*'; then
+    lsof -t /tmp/cobalt-gradle.lock.* | xargs -rt kill
   fi
   # Stop the Gradle daemon (if still running).
   $(dirname "$0")/gradlew --stop
@@ -67,4 +67,4 @@ MD5=$(echo "${GRADLE_ARGS[@]}" | md5sum)
 LOCKNUM=$(( ${BUCKETS} * 0x${MD5:0:6} / 0x1000000 ))
 
 echo "TASK: ${GRADLE_ARGS[-1]}"
-flock /var/lock/cobalt-gradle.lock.${LOCKNUM} $(dirname "$0")/gradlew "${GRADLE_ARGS[@]}"
+flock /tmp/cobalt-gradle.lock.${LOCKNUM} $(dirname "$0")/gradlew "${GRADLE_ARGS[@]}"
