@@ -19,7 +19,6 @@
     'in_app_dial': 0,
 
     'custom_media_session_client': 1,
-    'enable_account_manager': 1,
 
     # The 'android_system' font package installs only minimal fonts, with a
     # fonts.xml referencing the superset of font files we expect to find on any
